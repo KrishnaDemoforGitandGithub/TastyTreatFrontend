@@ -5,9 +5,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./Loading";
 const Billing = () => {
+  interface CartItem {
+    itemIndex: number;
+    quantity: number;
+  }
+
+  interface DataItem {
+    id: number;
+    name: string;
+    price: number;
+  }
+
   const navigate = useNavigate();
-  const [Data, setData] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const [Data, setData] = useState<DataItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function getItems() {
@@ -98,16 +109,19 @@ const Billing = () => {
                     const myItem = Data.find(
                       (item) => cartitem.itemIndex == item.id
                     );
-                    totalsum += cartitem.quantity * myItem.price;
-                    return (
-                      <tr key={myItem.id}>
-                        <td className="order">{myItem.name}</td>
-                        <td className="order">
-                          <i className="fa-solid fa-indian-rupee-sign"></i>
-                          {cartitem.quantity * myItem.price}
-                        </td>
-                      </tr>
-                    );
+                    if (myItem) {
+                      totalsum += cartitem.quantity * myItem.price;
+                      return (
+                        <tr key={myItem.id}>
+                          <td className="order">{myItem.name}</td>
+                          <td className="order">
+                            <i className="fa-solid fa-indian-rupee-sign"></i>
+                            {cartitem.quantity * myItem.price}
+                          </td>
+                        </tr>
+                      );
+                    }
+                    return null;
                   })}
                 <tr>
                   <td className="order">Subtotal:</td>

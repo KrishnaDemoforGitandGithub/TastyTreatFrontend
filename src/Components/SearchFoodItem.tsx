@@ -2,23 +2,41 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Loading from "./Loading";
 const SearchFoodItem = () => {
+  interface FoodItem {
+    img: string;
+    id: number;
+    name: string;
+    price: number;
+    nutrients: number[];
+    category: string;
+    sort: string;
+  }
+
+  interface CategoryItem {
+    itemIndex: number;
+    quantity: number;
+  }
+
   const [count, setCount] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CategoryItem[]>([]);
   const [noOfItemsInCart, setNoOfItemsInCart] = useState(0);
   const [searchedItem, setSearchedItem] = useState("");
   const [index, setIndex] = useState(0);
   const [sort, setSort] = useState("");
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<FoodItem | null>(null);
   const [textFieldData, setTextFieldData] = useState("");
   const [checkedOption, setCheckedOption] = useState("");
   const [categories, setCategories] = useState(true);
   const [clone, setClone] = useState(false);
-  const [left, setLeft] = useState({ "--left": "0px", "--top": "0px" });
+  const [left, setLeft] = useState<{ "--left": string; "--top": string }>({
+    "--left": "0px",
+    "--top": "0px",
+  });
   const [cartShake, setCartShake] = useState(false);
-  const [Data, setData] = useState([]);
+  const [Data, setData] = useState<FoodItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const elementRef = useRef(null);
-  const imageRef = useRef(null);
+  const elementRef = useRef<HTMLDivElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
   let totalsum = 0;
   useEffect(() => {
     async function getItems() {
@@ -46,7 +64,7 @@ const SearchFoodItem = () => {
           `https://tasty-treat-backend.vercel.app/removeItem?index=${index}&quantity=${quantity}`,
           { withCredentials: true }
         )
-        .then((res) => {
+        .then(() => {
           getNumberOfItems();
           getCartItems();
         });
@@ -328,13 +346,11 @@ const SearchFoodItem = () => {
 
         <div className="foodHouse">
           {/* -------------------ITEMS MAP FUNCTION BLOCK--------------------------- */}
-          {Data.filter((element, index) =>
-            element.category.includes(checkedOption)
-          )
-            .filter((element, index) =>
+          {Data.filter((element) => element.category.includes(checkedOption))
+            .filter((element) =>
               element.name.toLowerCase().includes(searchedItem.toLowerCase())
             )
-            .filter((element, index) => element.sort.includes(sort))
+            .filter((element) => element.sort.includes(sort))
             .map((item, index) => (
               <div
                 className="allFoodItems"
@@ -373,7 +389,7 @@ const SearchFoodItem = () => {
         <div
           className="modal fade"
           id="exampleModal"
-          tabIndex="-1"
+          tabIndex={-1}
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
@@ -391,7 +407,7 @@ const SearchFoodItem = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                <div style={left}>
+                <div style={left as React.CSSProperties}>
                   <div id="innerFirstBody">
                     <div>
                       <img
@@ -534,7 +550,6 @@ const SearchFoodItem = () => {
                         border: "none",
                         boxShadow: "0 0 2px rgba(0,0,0,0.3",
                       }}
-                      type="textfield"
                       value={textFieldData}
                       onChange={changeTextField}
                       placeholder="Add Instructions..."
@@ -591,7 +606,7 @@ const SearchFoodItem = () => {
       <div
         className="modal fade"
         id="cartModal"
-        tabIndex="-1"
+        tabIndex={-1}
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -674,41 +689,47 @@ const SearchFoodItem = () => {
                           const myItem = Data.find(
                             (item) => cartitem.itemIndex == item.id
                           );
-                          totalsum += cartitem.quantity * myItem.price;
-                          return (
-                            <tr style={{ height: "50px" }}>
-                              <td>
-                                <img
-                                  style={{
-                                    height: "50px",
-                                    width: "50px",
-                                  }}
-                                  src={myItem.img}
-                                  alt=""
-                                />
-                              </td>
-                              <td>{myItem.name}</td>
-                              <td>{cartitem.quantity}</td>
-                              <td>
-                                <i className="fa-solid fa-indian-rupee-sign"></i>
-                                {myItem.price}
-                              </td>
-                              <td>
-                                <i className="fa-solid fa-indian-rupee-sign"></i>
-                                {myItem.price * cartitem.quantity}
-                              </td>
-                              <td
-                                onClick={() =>
-                                  removeItem(
-                                    cartitem.itemIndex,
-                                    cartitem.quantity
-                                  )
-                                }
+                          if (myItem) {
+                            totalsum += cartitem.quantity * myItem.price;
+                            return (
+                              <tr
+                                key={cartitem.itemIndex}
+                                style={{ height: "50px" }}
                               >
-                                <i className="fa-solid fa-xmark"></i>
-                              </td>
-                            </tr>
-                          );
+                                <td>
+                                  <img
+                                    style={{
+                                      height: "50px",
+                                      width: "50px",
+                                    }}
+                                    src={myItem.img}
+                                    alt=""
+                                  />
+                                </td>
+                                <td>{myItem.name}</td>
+                                <td>{cartitem.quantity}</td>
+                                <td>
+                                  <i className="fa-solid fa-indian-rupee-sign"></i>
+                                  {myItem.price}
+                                </td>
+                                <td>
+                                  <i className="fa-solid fa-indian-rupee-sign"></i>
+                                  {myItem.price * cartitem.quantity}
+                                </td>
+                                <td
+                                  onClick={() =>
+                                    removeItem(
+                                      cartitem.itemIndex,
+                                      cartitem.quantity
+                                    )
+                                  }
+                                >
+                                  <i className="fa-solid fa-xmark"></i>
+                                </td>
+                              </tr>
+                            );
+                            return null;
+                          }
                         })}
                     </tbody>
                   </table>

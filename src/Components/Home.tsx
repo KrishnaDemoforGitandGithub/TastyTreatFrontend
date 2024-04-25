@@ -4,7 +4,6 @@ import treaticon from "./Images/treat.jpg";
 import Firstpage from "./Firstpage";
 import Navbar from "./NavBar";
 import Foodtypes from "./Foodtypes";
-import SearchFoodItem from "./SearchFoodItem";
 import Testimonials from "./Testimonials";
 import Greeting from "./Greeting";
 

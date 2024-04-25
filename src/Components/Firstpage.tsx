@@ -2,12 +2,12 @@ import { useEffect } from "react";
 
 const Firstpage = () => {
   useEffect(() => {
-    const swiper = new Swiper(".mySwiper", {
+    new (window as any).Swiper(".mySwiper", {
       slidesPerView: 1,
       spaceBetween: 30,
       loop: true,
       autoplay: {
-        delay: 3000,
+        delay: 2000,
         disableOnInteraction: false,
       },
       speed: 1500,
@@ -21,6 +21,7 @@ const Firstpage = () => {
       },
     });
   }, []);
+
   return (
     <div>
       <div id="firstPage">

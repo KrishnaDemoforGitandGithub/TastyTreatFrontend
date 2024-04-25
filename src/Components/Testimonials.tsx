@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-import treat from "./Images/treat.jpg";
 import pic4 from "./Images/warren-VVEwJJRRHgk-unsplash.jpg";
 import pic3 from "./Images/ayo-ogunseinde-6W4F62sN_yI-unsplash.jpg";
 import pic2 from "./Images/roman-holoschchuk-KAPRQjlSzCA-unsplash.jpg";
 import pic1 from "./Images/peter-john-manlapig-KRBHTbLTMDs-unsplash.jpg";
 const Testimonials = () => {
   useEffect(() => {
-    const swiper = new Swiper(".secondSwiper", {
+    new (window as any).Swiper(".secondSwiper", {
       slidesPerView: 1,
       spaceBetween: 30,
       loop: true,

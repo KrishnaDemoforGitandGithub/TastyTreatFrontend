@@ -1,4 +1,4 @@
-const Navbar = (props) => {
+const Navbar = (props: any) => {
   return (
     <div>
       <div id="NavBar">
