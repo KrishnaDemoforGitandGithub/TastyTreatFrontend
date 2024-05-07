@@ -113,9 +113,10 @@ const Foodtypes = () => {
                 style={{ height: "100px", width: "100px" }}
               />
               <div id="foodVariety">
-                <h5>Desserts</h5>
+                <h5>GSK</h5>
+                <h5 id="secondFoodMatter">Foods</h5>
               </div>
-              <p>4 Available</p>
+              <p>Opened</p>
             </div>
           </a>
 
@@ -132,10 +133,11 @@ const Foodtypes = () => {
                 style={{ height: "100px", width: "100px" }}
               />
               <div id="foodVariety">
-                <h5>Starters</h5>
+                <h5>Sangeeth</h5>
+                <h5 id="secondFoodMatter">Restaurant</h5>
                 {/* <h5 id="secondFoodMatter"> Foods</h5> */}
               </div>
-              <p>1 Available</p>
+              <p>Opened</p>
             </div>
           </a>
 
@@ -152,10 +154,11 @@ const Foodtypes = () => {
                 style={{ height: "100px", width: "100px" }}
               />
               <div id="foodVariety">
-                <h5>Veg-Items</h5>
+                <h5>Harsha's </h5>
+                <h5 id="secondFoodMatter">Foodex</h5>
                 {/* <h5 id="secondFoodMatter">Specials</h5> */}
               </div>
-              <p>2 Available</p>
+              <p> Opened</p>
             </div>
           </a>
         </div>
@@ -174,10 +177,10 @@ const Foodtypes = () => {
                 style={{ height: "100px", width: "100px" }}
               />
               <div id="foodVariety">
-                <h5>Non-Veg </h5>
-                <h5 id="secondFoodMatter">Items</h5>
+                <h5>Aadhya</h5>
+                <h5 id="secondFoodMatter">Grand</h5>
               </div>
-              <p>4 Available</p>
+              <p>Opened</p>
             </div>
           </a>
 
@@ -194,10 +197,10 @@ const Foodtypes = () => {
                 style={{ height: "100px", width: "100px" }}
               />
               <div id="foodVariety">
-                <h5>Salads</h5>
-                {/* <h5 id="secondFoodMatter">Vantalu</h5> */}
+                <h5>Southern</h5>
+                <h5 id="secondFoodMatter">Spicy</h5>
               </div>
-              <p>1 Available</p>
+              <p>Opened</p>
             </div>
           </a>
 
@@ -214,10 +217,10 @@ const Foodtypes = () => {
                 style={{ height: "100px", width: "100px" }}
               />
               <div id="foodVariety">
-                <h5>Soups</h5>
-                {/* <h5 id="secondFoodMatter"> Snacks</h5> */}
+                <h5>Supreme</h5>
+                <h5 id="secondFoodMatter"> Restaurant</h5>
               </div>
-              <p>1 Available</p>
+              <p>Opened</p>
             </div>
           </a>
         </div>

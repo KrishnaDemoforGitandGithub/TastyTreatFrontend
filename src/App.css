@@ -250,6 +250,13 @@ img:hover {
   color: rgb(177, 174, 174);
   font-size: 13px;
 }
+#foodVariety {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 #foodVariety:hover {
   color: rgb(221, 144, 1);
 }
