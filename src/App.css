@@ -281,6 +281,10 @@ img:hover {
   height: 40px;
   border-radius: 8px;
 }
+#cartTable {
+  overflow-x: scroll;
+}
+
 #searchIcon {
   margin-top: 12px;
   margin-left: 8px;
@@ -1202,5 +1206,11 @@ td {
 
   .sorting select {
     margin-left: 20px;
+  }
+  #innerFirstFirstHouse {
+    margin-left: 2px;
+  }
+  #cart {
+    left: 80%;
   }
 }

@@ -503,10 +503,9 @@ const SearchFoodItem = () => {
                       </div>
                     </div>
                     <div id="innerFirstFirstHouse">
-                      <h1 style={{ color: "rgb(15, 15, 169)" }}>
-                        {" "}
+                      <h4 style={{ color: "rgb(15, 15, 169)" }}>
                         {selectedItem.name}
-                      </h1>
+                      </h4>
                       <div className="innerFirstSecondHouse">
                         <div id="innerFistSecondBody">
                           <h6>CARBOHYDRATES</h6>
@@ -665,74 +664,76 @@ const SearchFoodItem = () => {
                       {noOfItemsInCart} items in your bag
                     </p>
                   </div>
-                  <table
-                    className="mt-3"
-                    style={{
-                      width: "100%",
-                      borderCollapse: "separate",
-                      borderSpacing: "0 25px",
-                    }}
-                  >
-                    <thead>
-                      <tr style={{ paddingBottom: "100px" }}>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Subtotal</th>
-                        <th>Remove</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cartItems.length > 0 &&
-                        cartItems.map((cartitem) => {
-                          const myItem = Data.find(
-                            (item) => cartitem.itemIndex == item.id
-                          );
-                          if (myItem) {
-                            totalsum += cartitem.quantity * myItem.price;
-                            return (
-                              <tr
-                                key={cartitem.itemIndex}
-                                style={{ height: "50px" }}
-                              >
-                                <td>
-                                  <img
-                                    style={{
-                                      height: "50px",
-                                      width: "50px",
-                                    }}
-                                    src={myItem.img}
-                                    alt=""
-                                  />
-                                </td>
-                                <td>{myItem.name}</td>
-                                <td>{cartitem.quantity}</td>
-                                <td>
-                                  <i className="fa-solid fa-indian-rupee-sign"></i>
-                                  {myItem.price}
-                                </td>
-                                <td>
-                                  <i className="fa-solid fa-indian-rupee-sign"></i>
-                                  {myItem.price * cartitem.quantity}
-                                </td>
-                                <td
-                                  onClick={() =>
-                                    removeItem(
-                                      cartitem.itemIndex,
-                                      cartitem.quantity
-                                    )
-                                  }
-                                >
-                                  <i className="fa-solid fa-xmark"></i>
-                                </td>
-                              </tr>
+                  <div id="cartTable">
+                    <table
+                      className="mt-3"
+                      style={{
+                        width: "100%",
+                        borderCollapse: "separate",
+                        borderSpacing: "0 25px",
+                      }}
+                    >
+                      <thead>
+                        <tr style={{ paddingBottom: "100px" }}>
+                          <th>Image</th>
+                          <th>Name</th>
+                          <th>Qty</th>
+                          <th>Price</th>
+                          <th>Subtotal</th>
+                          <th>Remove</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cartItems.length > 0 &&
+                          cartItems.map((cartitem) => {
+                            const myItem = Data.find(
+                              (item) => cartitem.itemIndex == item.id
                             );
-                            return null;
-                          }
-                        })}
-                    </tbody>
-                  </table>
+                            if (myItem) {
+                              totalsum += cartitem.quantity * myItem.price;
+                              return (
+                                <tr
+                                  key={cartitem.itemIndex}
+                                  style={{ height: "50px" }}
+                                >
+                                  <td>
+                                    <img
+                                      style={{
+                                        height: "50px",
+                                        width: "50px",
+                                      }}
+                                      src={myItem.img}
+                                      alt=""
+                                    />
+                                  </td>
+                                  <td>{myItem.name}</td>
+                                  <td>{cartitem.quantity}</td>
+                                  <td>
+                                    <i className="fa-solid fa-indian-rupee-sign"></i>
+                                    {myItem.price}
+                                  </td>
+                                  <td>
+                                    <i className="fa-solid fa-indian-rupee-sign"></i>
+                                    {myItem.price * cartitem.quantity}
+                                  </td>
+                                  <td
+                                    onClick={() =>
+                                      removeItem(
+                                        cartitem.itemIndex,
+                                        cartitem.quantity
+                                      )
+                                    }
+                                  >
+                                    <i className="fa-solid fa-xmark"></i>
+                                  </td>
+                                </tr>
+                              );
+                              return null;
+                            }
+                          })}
+                      </tbody>
+                    </table>
+                  </div>
                   {/* ----------------cart Table End---------------- */}
                   {/* </div> */}
                 </div>
