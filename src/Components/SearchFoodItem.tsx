@@ -671,6 +671,7 @@ const SearchFoodItem = () => {
                         width: "100%",
                         borderCollapse: "separate",
                         borderSpacing: "0 25px",
+                        background: "rgb(240,240,240)",
                       }}
                     >
                       <thead>
