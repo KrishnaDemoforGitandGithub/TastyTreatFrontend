@@ -201,7 +201,7 @@ const SearchFoodItem = () => {
   };
   return (
     <div id="food">
-      <div className="searchOuterBox mb-5 mt-3">
+      <div className="searchOuterBox mb-5 mt-5">
         <div className="searchInnerBox">
           <div>
             <i
