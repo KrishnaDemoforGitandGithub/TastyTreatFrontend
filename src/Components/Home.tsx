@@ -1,29 +1,50 @@
+import React, { lazy, Suspense } from "react";
 import treat from "./Images/tastyTreatIcon.jpg";
 import FooterData from "./Footer";
 import treaticon from "./Images/treat.jpg";
-import Firstpage from "./Firstpage";
+import Loading from "./Loading";
 import Navbar from "./NavBar";
-import Foodtypes from "./Foodtypes";
-import Testimonials from "./Testimonials";
+
 import Greeting from "./Greeting";
+import { useEffect, useState } from "react";
+const Firstpage = lazy(() => import("./Firstpage"));
+const FoodTypes = lazy(() => import("./Foodtypes"));
+const Testimonials = lazy(() => import("./Testimonials"));
 
 const Home = () => {
+  const [greet, setGreet] = useState(false);
+  useEffect(() => {
+    async function greetFunction() {
+      if (
+        sessionStorage.getItem("greet") == null ||
+        sessionStorage.getItem("greet") == "No"
+      ) {
+        setGreet(true);
+        sessionStorage.setItem("greet", "yes");
+      }
+    }
+    greetFunction();
+  }, []);
+
   return (
     <div>
-      {/* -----------GREETING-------------- */}
-      <Greeting />
+      {greet == true ? <Greeting /> : ""}
       {/* ----------NAVBAR------------- */}
       <Navbar treat={treat} />
-
       {/* ------------First Page--------- */}
-      <Firstpage />
-
+      <Suspense fallback={<Loading />}>
+        <Firstpage />
+      </Suspense>
       {/* ----------FoodTypes------------- */}
-      <Foodtypes />
+      <Suspense fallback={<Loading />}>
+        <FoodTypes />
+      </Suspense>
       {/* ------------searchFood------------ */}
       {/* <SearchFoodItem /> */}
       {/* -----------testimonials----------- */}
-      <Testimonials />
+      <Suspense fallback={<Loading />}>
+        <Testimonials />
+      </Suspense>
       {/* ----------footer------------ */}
       <FooterData treaticon={treaticon} />
     </div>

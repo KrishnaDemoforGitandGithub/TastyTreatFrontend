@@ -45,9 +45,11 @@ const Billing = () => {
   async function getCartItems() {
     try {
       await axios
-        .get("https://tasty-treat-backend.vercel.app/getcartItems", {
-          withCredentials: true,
-        })
+        .get(
+          `https://tasty-treat-backend.vercel.app/getcartItems?jwtitems=${localStorage.getItem(
+            "items"
+          )}`
+        )
         .then((res) => setCartItems(res.data));
     } catch (err) {
       console.log(err);
@@ -113,10 +115,12 @@ const Billing = () => {
                       totalsum += cartitem.quantity * myItem.price;
                       return (
                         <tr key={myItem.id}>
-                          <td className="order">{myItem.name}</td>
+                          <td className="order">
+                            <b>{myItem.name}</b>
+                          </td>
                           <td className="order">
                             <i className="fa-solid fa-indian-rupee-sign"></i>
-                            {cartitem.quantity * myItem.price}
+                            <b>{cartitem.quantity * myItem.price}</b>
                           </td>
                         </tr>
                       );
@@ -135,7 +139,7 @@ const Billing = () => {
                   <td className="order">
                     <p style={{ textDecoration: "line-through" }}>
                       <i className="fa-solid fa-indian-rupee-sign"></i>
-                      30
+                      50
                     </p>{" "}
                     <b style={{ color: "green" }}> FREE</b>
                   </td>
@@ -159,9 +163,10 @@ const Billing = () => {
         <div
           style={{
             margin: "auto",
-            padding: "50px",
+            padding: "20px",
             backgroundColor: "white",
             boxShadow: "0 0 10px rgba(0,0,0,0.08)",
+            width: "80%",
           }}
         >
           <div className="mb-3">
@@ -174,7 +179,7 @@ const Billing = () => {
             >
               Billing Details :
             </h1>
-            <div style={{ display: "flex" }}>
+            <div>
               <div>
                 <p
                   style={{
@@ -187,7 +192,7 @@ const Billing = () => {
                 </p>
                 <input type="text" placeholder="First name" />
               </div>
-              <div className="ms-3">
+              <div>
                 <p
                   style={{
                     marginBottom: "0",

@@ -15,6 +15,7 @@ const SearchFoodItem = () => {
   interface CategoryItem {
     itemIndex: number;
     quantity: number;
+    iat: number;
   }
 
   const [count, setCount] = useState(1);
@@ -57,14 +58,21 @@ const SearchFoodItem = () => {
   }, []);
 
   // -----------------------------REMOVE ITEM FROM CART---------------------
-  async function removeItem(index: any, quantity: any) {
+  async function removeItem(iat: any) {
     try {
       await axios
         .get(
-          `https://tasty-treat-backend.vercel.app/removeItem?index=${index}&quantity=${quantity}`,
-          { withCredentials: true }
+          `https://tasty-treat-backend.vercel.app/removeItem?iat=${iat}&jwtitems=${localStorage.getItem(
+            "items"
+          )}`
         )
-        .then(() => {
+        .then((res) => {
+          console.log(res.data);
+          if (res.data == "null" || res.data == null) {
+            localStorage.removeItem("items");
+          } else {
+            localStorage.setItem("items", res.data);
+          }
           getNumberOfItems();
           getCartItems();
         });
@@ -77,12 +85,20 @@ const SearchFoodItem = () => {
   async function getCartItems() {
     try {
       await axios
-        .get("https://tasty-treat-backend.vercel.app/getcartItems", {
-          withCredentials: true,
-        })
+        .get(
+          `https://tasty-treat-backend.vercel.app/getcartItems?jwtitems=${localStorage.getItem(
+            "items"
+          )}`
+        )
         .then((res) => {
-          document.cookie = `item=${res.data}`;
-          setCartItems(res.data);
+          const items = res.data != null ? res.data : [];
+          setCartItems(items);
+
+          // Check if cart is empty and remove 'items' key from local storage if true
+          if (items.length === 0) {
+            localStorage.removeItem("items");
+          }
+          getNumberOfItems();
         });
     } catch (err) {
       console.log(err);
@@ -94,12 +110,18 @@ const SearchFoodItem = () => {
     try {
       await axios
         .get(
-          `https://tasty-treat-backend.vercel.app/addToCart?index=${index}&quantity=${quantity}`,
-          { withCredentials: true }
+          `https://tasty-treat-backend.vercel.app/addToCart?index=${index}&quantity=${quantity}`
         )
         .then((res) => {
-          setCartItems(res.data);
-          getNumberOfItems();
+          let items: string[] = [];
+          let storedItems = localStorage.getItem("items");
+          if (storedItems != null) {
+            items = storedItems.split(",");
+          }
+          items.push(res.data);
+          localStorage.setItem("items", items.join(","));
+          getCartItems();
+          setNoOfItemsInCart(items.length);
         });
     } catch (err) {
       console.log(err);
@@ -107,17 +129,10 @@ const SearchFoodItem = () => {
   }
   // -----------------end----------------
 
-  // ------------------get no of itemsin cart------------
+  // ------------------get no of items in cart------------
   async function getNumberOfItems() {
-    try {
-      await axios
-        .get(`https://tasty-treat-backend.vercel.app/getItems`, {
-          withCredentials: true,
-        })
-        .then((res) => setNoOfItemsInCart(res.data.length));
-    } catch (err) {
-      console.log(err);
-    }
+    let itemCount = localStorage.getItem("items");
+    setNoOfItemsInCart(itemCount == null ? 0 : itemCount.split(",").length);
   }
   // ------------------end-------------------------
   if (isLoading) {
@@ -697,7 +712,7 @@ const SearchFoodItem = () => {
                               totalsum += cartitem.quantity * myItem.price;
                               return (
                                 <tr
-                                  key={cartitem.itemIndex}
+                                  key={cartitem.iat}
                                   style={{ height: "50px" }}
                                 >
                                   <td>
@@ -720,14 +735,7 @@ const SearchFoodItem = () => {
                                     <i className="fa-solid fa-indian-rupee-sign"></i>
                                     {myItem.price * cartitem.quantity}
                                   </td>
-                                  <td
-                                    onClick={() =>
-                                      removeItem(
-                                        cartitem.itemIndex,
-                                        cartitem.quantity
-                                      )
-                                    }
-                                  >
+                                  <td onClick={() => removeItem(cartitem.iat)}>
                                     <i className="fa-solid fa-xmark"></i>
                                   </td>
                                 </tr>
