@@ -80,7 +80,10 @@ const SearchFoodItem = () => {
         .get("https://tasty-treat-backend.vercel.app/getcartItems", {
           withCredentials: true,
         })
-        .then((res) => setCartItems(res.data));
+        .then((res) => {
+          document.cookie = `item=${res.data}`;
+          setCartItems(res.data);
+        });
     } catch (err) {
       console.log(err);
     }
