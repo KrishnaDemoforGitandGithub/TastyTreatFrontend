@@ -41,7 +41,7 @@ const SearchFoodItem = () => {
   useEffect(() => {
     async function getItems() {
       try {
-        await fetch("https://tasty-treat-backend.vercel.app/getFoodItems")
+        await fetch("http://localhost:8080/getFoodItems")
           .then((res) => res.json())
           .then((data) => {
             setData(data);
@@ -61,7 +61,7 @@ const SearchFoodItem = () => {
     try {
       await axios
         .get(
-          `https://tasty-treat-backend.vercel.app/removeItem?index=${index}&quantity=${quantity}`,
+          `http://localhost:8080/removeItem?index=${index}&quantity=${quantity}`,
           { withCredentials: true }
         )
         .then(() => {
@@ -77,10 +77,13 @@ const SearchFoodItem = () => {
   async function getCartItems() {
     try {
       await axios
-        .get("https://tasty-treat-backend.vercel.app/getcartItems", {
+        .get("http://localhost:8080/getcartItems", {
           withCredentials: true,
         })
-        .then((res) => setCartItems(res.data));
+        .then((res) => {
+          document.cookie = `item=${res.data}`;
+          setCartItems(res.data);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -91,7 +94,7 @@ const SearchFoodItem = () => {
     try {
       await axios
         .get(
-          `https://tasty-treat-backend.vercel.app/addToCart?index=${index}&quantity=${quantity}`,
+          `http://localhost:8080/addToCart?index=${index}&quantity=${quantity}`,
           { withCredentials: true }
         )
         .then((res) => {
@@ -108,7 +111,7 @@ const SearchFoodItem = () => {
   async function getNumberOfItems() {
     try {
       await axios
-        .get(`https://tasty-treat-backend.vercel.app/getItems`, {
+        .get(`http://localhost:8080/getItems`, {
           withCredentials: true,
         })
         .then((res) => setNoOfItemsInCart(res.data.length));
