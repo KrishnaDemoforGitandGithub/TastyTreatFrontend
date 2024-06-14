@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Navbar from "./NavBar";
-import treat from "./Images/tastyTreatIcon.jpg";
+import treat from "./Images/tastyTreatIcon-min.jpg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./Loading";
