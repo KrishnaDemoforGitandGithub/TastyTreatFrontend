@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import treat from "./Images/tastyTreatIcon.jpg";
 import FooterData from "./Footer";
 import treaticon from "./Images/treat.jpg";
