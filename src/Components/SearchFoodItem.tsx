@@ -494,7 +494,7 @@ const SearchFoodItem = () => {
                               borderRadius: "50%",
                             }}
                           >
-                            <i className="fa-solid fa-minus"></i>
+                            <i className="fa-solid faus"></i>
                           </div>
                           {/* ---------set the count------------- */}
                           <p

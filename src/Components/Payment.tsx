@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "./NavBar";
-import treat from "./Images/tastyTreatIcon-min.jpg";
-import scanner from "./Images/PaymentScanner-min.jpg";
+import treat from "./Images/tastyTreatIcon.jpg";
+import scanner from "./Images/PaymentScanner.jpg";
 const Payment = () => {
   const [File, setFile] = useState(null);
   const makeFile = (event: any) => {

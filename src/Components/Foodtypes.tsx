@@ -1,16 +1,16 @@
-import img1 from "./Images/kobby-mendez-idTwDKt2j2o-unsplash-min.jpg";
-import img2 from "./Images/Starter small-min.jpg";
-import img3 from "./Images/veg small-min.jpg";
-import img4 from "./Images/shreyak-singh-0j4bisyPo3M-unsplash-min.jpg";
-import img5 from "./Images/salad small-min.jpg";
-import img6 from "./Images/soup small-min.jpg";
+import img1 from "./Images/kobby-mendez-idTwDKt2j2o-unsplash.jpg";
+import img2 from "./Images/Starter small.jpg";
+import img3 from "./Images/veg small.jpg";
+import img4 from "./Images/shreyak-singh-0j4bisyPo3M-unsplash.jpg";
+import img5 from "./Images/salad small.jpg";
+import img6 from "./Images/soup small.jpg";
 import { useState } from "react";
-import image1 from "./Images/max-panama-AWFYboL6BE4-unsplash-min.jpg";
-import image2 from "./Images/starter big-min.jpg";
-import image3 from "./Images/veg big-min.jpg";
-import image4 from "./Images/nonveg big-min.jpg";
-import image5 from "./Images/salad big-min.jpg";
-import image6 from "./Images/soup big-min.jpg";
+import image1 from "./Images/max-panama-AWFYboL6BE4-unsplash.jpg";
+import image2 from "./Images/starter big.jpg";
+import image3 from "./Images/veg big.jpg";
+import image4 from "./Images/nonveg big.jpg";
+import image5 from "./Images/salad big.jpg";
+import image6 from "./Images/soup big.jpg";
 import SearchFoodItem from "./SearchFoodItem";
 const Foodtypes = () => {
   const [bgcolor, setBgcolor] = useState(0);

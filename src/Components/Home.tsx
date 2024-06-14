@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
-import treat from "./Images/tastyTreatIcon-min.jpg";
+import treat from "./Images/tastyTreatIcon.jpg";
 import FooterData from "./Footer";
-import treaticon from "./Images/treat-min.jpg";
+import treaticon from "./Images/treat.jpg";
 import Loading from "./Loading";
 import Navbar from "./NavBar";
 
