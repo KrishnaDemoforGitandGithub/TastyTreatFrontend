@@ -20,14 +20,24 @@ const OrderPlaced = () => {
   }, []);
 
   return (
-    <dotlottie-player
-      src="https://lottie.host/8f7b692b-bf50-4b49-8984-6411222e9104/IKBs1GcNdJ.json"
-      background="transparent"
-      speed={1.25}
-      style={{ width: "100%", height: "60%" }}
-      direction={1}
-      autoplay
-    ></dotlottie-player>
+    <div
+      style={{
+        height: "100vh",
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <dotlottie-player
+        src="https://lottie.host/8f7b692b-bf50-4b49-8984-6411222e9104/IKBs1GcNdJ.json"
+        background="transparent"
+        speed={1.25}
+        style={{ width: "100%", height: "100%", margin: "auto" }}
+        direction={1}
+        autoplay
+      ></dotlottie-player>
+    </div>
   );
 };
 
