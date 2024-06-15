@@ -1,15 +1,27 @@
+import { lazy, Suspense } from "react";
 import { useState } from "react";
 import Navbar from "./NavBar";
 import treat from "./Images/tastyTreatIcon.jpg";
 import scanner from "./Images/PaymentScanner.jpg";
+const OrderPlaced = lazy(() => import("./OrderPlaced"));
+
 const Payment = () => {
   const [File, setFile] = useState(null);
+  const [order, setOrder] = useState(false);
   const makeFile = (event: any) => {
     setFile(event.target.files[0]);
   };
+  if (order) {
+    return (
+      <Suspense>
+        <OrderPlaced />
+      </Suspense>
+    );
+  }
   return (
     <div>
       <Navbar treat={treat} />
+
       <div
         style={{
           marginTop: "200px",
@@ -48,7 +60,10 @@ const Payment = () => {
           <button
             className="orderButton"
             style={{ margin: "auto", marginTop: "20px" }}
-            onClick={() => setFile(null)}
+            onClick={() => {
+              setOrder(true);
+              setFile(null);
+            }}
           >
             Submit
           </button>
